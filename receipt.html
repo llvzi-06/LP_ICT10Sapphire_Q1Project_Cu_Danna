@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f9f4d7;
+        }
+        h1 {
+            color: #d97a9b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Receipt</h1>
+
+    <div id="items"></div>
+    <p id="subtotal">Subtotal: ₱</p>
+    <p id="tax">Tax: ₱</p>
+    <p id="total">Total: ₱</p>
+
+    <script>
+        var page = location.href;
+
+        var itemText = page.split("items=")[1].split("&")[0];
+        var subtotalText = page.split("subtotal=")[1].split("&")[0];
+        var taxText = page.split("tax=")[1].split("&")[0];
+        var totalText = page.split("total=")[1].split("&")[0];
+
+        itemText = decodeURIComponent(itemText);
+        itemText = itemText.replace(/,/g, "<br>");
+
+        document.getElementById("items").innerHTML = itemText;
+        document.getElementById("subtotal").innerHTML = "Subtotal: ₱" + Number(subtotalText).toFixed(2);
+        document.getElementById("tax").innerHTML = "Tax: ₱" + Number(taxText).toFixed(2);
+        document.getElementById("total").innerHTML = "Total: ₱" + Number(totalText).toFixed(2);
+    </script>
+</body>
+</html>
