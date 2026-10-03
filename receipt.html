@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f9f4d7;
+        }
+        h1 {
+            color: #d97a9b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Receipt</h1>
+
+    <div id="receipt-content"></div>
+    <a href="index.html">Back to Menu</a>
+
+    <script>
+        document.getElementById("receipt-content").innerHTML =
+            decodeURIComponent(window.location.search.replace("?receipt=", ""));
+    </script>
+</body>
+</html>

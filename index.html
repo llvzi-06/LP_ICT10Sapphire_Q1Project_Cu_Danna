@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creampuff Menu</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.5.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.5.2/core.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            min-height: 100vh;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 20px 5vw 20px 20px;
+            background-image: url('Untitled Design.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+        }
+        .menu {
+            background-color: #fbf7e1be;
+            padding: 20px;
+            width: 500px;
+            max-width: 100%;
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: 0;
+            border-radius: 12px;
+        }
+        #show {
+            margin-top: 16px;
+        }
+        .sku-generator {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #777;
+        }
+        .sku-generator label {
+            display: block;
+            margin: 8px 0 4px;
+        }
+        .sku-generator input {
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+        h1 {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+    <section class="sku-generator">
+        <h2>SKU Generator</h2>
+        <label for="category">Category</label>
+        <input id="category" type="text">
+        <label for="product_name">Product name</label>
+        <select id="product_name">
+            <option value="Strawberry">Strawberry</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Vanilla">Vanilla</option>
+            <option value="Mango">Mango</option>
+            <option value="Blueberry">Blueberry</option>
+        </select>
+        <label for="quantity">Stock quantity</label>
+        <input id="quantity" type="number" min="0">
+        <br><br>
+        <button py-click="SKU_generator">Generate SKU</button>
+        <div id="sku_output" aria-live="polite"></div>
+    </section>
+
+    <h1 style="color: black;">Creampuff Menu</h1>
+
+    <input type="checkbox" id="strawberry" value="75"> Strawberry - ₱75<br>
+    <input type="checkbox" id="chocolate" value="80"> Chocolate - ₱80<br>
+    <input type="checkbox" id="vanilla" value="70"> Vanilla - ₱70<br>
+    <input type="checkbox" id="mango" value="85"> Mango - ₱85<br>
+    <input type="checkbox" id="blueberry" value="90"> Blueberry - ₱90<br><br>
+
+    <button type="button" onclick="viewReceipt()">View Receipt</button>
+    </div>
+
+    <script>
+        function viewReceipt() {
+            var items = "";
+            var subtotal = 0;
+
+            if (document.getElementById("strawberry").checked) {
+                items += "Strawberry - ₱75<br>";
+                subtotal += 75;
+            }
+            if (document.getElementById("chocolate").checked) {
+                items += "Chocolate - ₱80<br>";
+                subtotal += 80;
+            }
+            if (document.getElementById("vanilla").checked) {
+                items += "Vanilla - ₱70<br>";
+                subtotal += 70;
+            }
+            if (document.getElementById("mango").checked) {
+                items += "Mango - ₱85<br>";
+                subtotal += 85;
+            }
+            if (document.getElementById("blueberry").checked) {
+                items += "Blueberry - ₱90<br>";
+                subtotal += 90;
+            }
+
+            var tax = subtotal * 0.12;
+            var total = subtotal + tax;
+            var receipt = "<h3>Receipt</h3>" + items +
+                "<p>Subtotal: ₱" + subtotal.toFixed(2) + "</p>" +
+                "<p>Tax: ₱" + tax.toFixed(2) + "</p>" +
+                "<p><strong>Total: ₱" + total.toFixed(2) + "</strong></p>";
+
+            window.location.href = "receipt.html?receipt=" + encodeURIComponent(receipt);
+        }
+    </script>
+    <script type="py" src="./main.py"></script>
+</body>
+</html>
